@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Note List</title>
+</head>
+<body>
+    <a href="/create-note">Create a new note</a>
+    <h1>Notes</h1>
+    <form>
+        Search by title:
+        <input name="s" type="text">
+        <input type="submit" value="/Search">
+    </form><br/>
+    <table th:border="1">
+        <tr>
+            <td>Title</td>
+            <td>Content</td>
+            <td>Edit</td>
+            <td>Delete</td>
+        </tr>
+
+        <th:block th:each="note : ${notes}">
+            <tr>
+                <td th:text="${note.title}"></td>
+                <td th:text="${note.content}"></td>
+                <td><a th:href="@{/edit-note/__${note.typeId}__}"></a></td>
+                <td><a th:href="@{/delete-note/__${note.typeId}__}"></a></td>
+            </tr>
+        </th:block>
+    </table>
+    <div>
+        <a th:href="@{'/notes'(page=${notes.number - 1})}" th:if="${notes.hasPrevious()}">Previous</a>
+        <span th:text="${notes.number + 1}"></span>/<span th:text="${notes.totalPages}"></span>
+        <a th:href="@{'/notes'(page=${notes.number + 1})}" th:if="${notes.hasNext()}">Next</a>
+    </div>
+</body>
+</html>
