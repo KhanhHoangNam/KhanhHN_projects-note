@@ -8,8 +8,35 @@
     <title>Document</title>
 </head>
 <body>
-    Id: <span th:text="${note.typeId}"></span>
-    Title: <span th:text="${note.title}"></span>
-    Content: <span th:text="${note.content}"></span>
+    <h1>Create a new note</h1>
+    <p>
+        <a href="/notes">Note list</a>
+    </p>
+    <th:block th:if="${message}">
+       <p th:text="${message}"></p>
+    </th:block>
+    <block>
+        <form th:action="@{/create-note}" th:object="${note}" method="post">
+            <table>
+            <tr>
+                <td>Title:</td>
+                <td><input type="text" th:text="*{title}"></td>
+            </tr>
+
+            <tr>
+                <td>Content:</td>
+                <td><input type="text" th:text="*{content}"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Create a new note"></td>
+            </tr>
+            </table>
+        </form>
+    </block>
+    <!--Id: <span th:text="${note.typeId}"></span>-->
+    <!--Title: <span th:text="${note.title}"></span>-->
+    <!--Content: <span th:text="${note.content}"></span>-->
 </body>
 </html>
