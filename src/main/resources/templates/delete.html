@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit note</title>
+</head>
+<body>
+<h1>Delete note</h1>
+<h1>Are you sure?</h1>
+<p>
+    <a href="/notes">Note list</a>
+</p>
+<!--<th:block th:if="${message}">-->
+    <!--<p th:text="${message}"></p>-->
+<!--</th:block>-->
+<block>
+    <form th:action="@{/delete-note}" th:object="${note}" method="post">
+        <input type="hidden" name="typeId" th:field="*{typeId}">
+        <table>
+            <tr>
+                <td>Title:</td>
+                <td th:text="*{title}"></td>
+            </tr>
+
+            <tr>
+                <td>Content:</td>
+                <td th:text="*{content}"></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Delete note"></td>
+            </tr>
+        </table>
+    </form>
+</block>
+<!--Id: <span th:text="${note.typeId}"></span>-->
+<!--Title: <span th:text="${note.title}"></span>-->
+<!--Content: <span th:text="${note.content}"></span>-->
+</body>
+</html>
